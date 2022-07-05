@@ -1,0 +1,33 @@
+.buttonAlgo{
+    border-radius: 15px !important; 
+    width: 70px;
+}
+
+#timeQuantum{
+  width: 80px;
+}
+footer{  height: 100x; bottom: 0; width: 100%; }
+
+
+#more {display: none;}
+
+body,h1,h2,h3,h4,h5 {
+    font-family: "Raleway", sans-serif
+}
+
+.w3-row {
+    background-color: #272b34;
+    margin: auto;
+    width: 90%;
+    border: 1px solid #272b34;
+    
+    border-radius: 5px;
+    
+    padding: 15px;
+    color: aliceblue;
+}
+
+#image{
+  width: 40%;
+  height: 25%;
+}

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./css/style.css">
+		<title>SJF</title>
+	</head>
+
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="index.html">CPU Scheduling Simulator</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+							<li class="nav-item">
+								<a class="nav-link" href="fcfs.html">FCFS</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/sjf.html">SJF</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/srtf.html">SRTF</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/roundrobin.html">Round Robin</a>
+							</li>
+						</ul>
+
+					</div>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+						<ul class="navbar-nav ">
+
+							<li class="nav-item">
+								<a class="nav-link active" href="contactUs.html">Contact US</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</nav>
+		</header>
+		<div class="container  mt-3 border">
+			<div class="row text-capitalize bg-light ">
+				<div class="col">
+					<h1 class=" text-center">Shortest Remaining Time First</h1>
+				</div>
+			</div>
+		</div>
+		<div class="container mt-3">
+			<div class="row">
+				<div class="col">
+					<b>What is Shortest Remaining Time First?</b>
+					<br>
+					SRTF, Which Stands for Shortest Remaining Time First is a scheduling algorithm used in Operating
+					Systems, which can also
+					be called as the preemptive version of the SJF scheduling algorithm. The process which has the least
+					processing time
+					remaining is executed first. As it is a preemptive type of schedule, it is claimed to be better than
+					SJF scheduling
+					Algorithm.
+				</div>
+			</div>
+		</div>
+		<div class="card container mt-3 ">
+			<h5 class="card-header ">
+				<div class="row">
+					<div class="col-11">SRTF</div>
+				</div>
+			</h5>
+			<div class="card-body" id="myInput">
+				<pre>
+ <code id="htmlViewer" style="color:rgb(171, 178, 191); font-weight:400;background-color:rgb(40, 44, 52);background:rgb(40, 44, 52);display:block;padding: .5em;"><span style="color:rgb(92, 99, 112); font-weight:400;">// C++ program to implement Shortest Remaining Time First</span>
+<span style="color:rgb(92, 99, 112); font-weight:400;">// Shortest Remaining Time First (SRTF)</span>
+
+<span style="color:rgb(97, 174, 238); font-weight:400;">#<span style="color:rgb(97, 174, 238); font-weight:400;">include</span> <span style="color:rgb(152, 195, 121); font-weight:400;">&lt;bits/stdc++.h&gt;</span></span>
+<span style="color:rgb(198, 120, 221); font-weight:400;">using</span> <span style="color:rgb(198, 120, 221); font-weight:400;">namespace</span> std;
+
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">struct</span> <span style="color:rgb(97, 174, 238); font-weight:400;">Process</span> {</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> pid; <span style="color:rgb(92, 99, 112); font-weight:400;">// Process ID</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> bt; <span style="color:rgb(92, 99, 112); font-weight:400;">// Burst Time</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> art; <span style="color:rgb(92, 99, 112); font-weight:400;">// Arrival Time</span>
+};
+
+<span style="color:rgb(92, 99, 112); font-weight:400;">// Function to find the waiting time for all</span>
+<span style="color:rgb(92, 99, 112); font-weight:400;">// processes</span>
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">void</span> <span style="color:rgb(97, 174, 238); font-weight:400;">findWaitingTime</span><span style="color:rgb(171, 178, 191); font-weight:400;">(Process proc[], <span style="color:rgb(198, 120, 221); font-weight:400;">int</span> n,<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> wt[])</span>
+</span>{
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> rt[n];
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Copy the burst time into rt[]</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">for</span> (<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> i = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>; i &lt; n; i++)
+		rt[i] = proc[i].bt;
+
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> complete = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>, t = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>, minm = INT_MAX;
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> shortest = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>, finish_time;
+	<span style="color:rgb(198, 120, 221); font-weight:400;">bool</span> check = <span style="color:rgb(86, 182, 194); font-weight:400;">false</span>;
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Process until all processes gets</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// completed</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">while</span> (complete != n) {
+
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// Find process with minimum</span>
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// remaining time among the</span>
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// processes that arrives till the</span>
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// current time`</span>
+		<span style="color:rgb(198, 120, 221); font-weight:400;">for</span> (<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> j = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>; j &lt; n; j++) {
+			<span style="color:rgb(198, 120, 221); font-weight:400;">if</span> ((proc[j].art &lt;= t) &amp;&amp;
+			(rt[j] &lt; minm) &amp;&amp; rt[j] &gt; <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>) {
+				minm = rt[j];
+				shortest = j;
+				check = <span style="color:rgb(86, 182, 194); font-weight:400;">true</span>;
+			}
+		}
+
+		<span style="color:rgb(198, 120, 221); font-weight:400;">if</span> (check == <span style="color:rgb(86, 182, 194); font-weight:400;">false</span>) {
+			t++;
+			<span style="color:rgb(198, 120, 221); font-weight:400;">continue</span>;
+		}
+
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// Reduce remaining time by one</span>
+		rt[shortest]--;
+
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// Update minimum</span>
+		minm = rt[shortest];
+		<span style="color:rgb(198, 120, 221); font-weight:400;">if</span> (minm == <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>)
+			minm = INT_MAX;
+
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// If a process gets completely</span>
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// executed</span>
+		<span style="color:rgb(198, 120, 221); font-weight:400;">if</span> (rt[shortest] == <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>) {
+
+			<span style="color:rgb(92, 99, 112); font-weight:400;">// Increment complete</span>
+			complete++;
+			check = <span style="color:rgb(86, 182, 194); font-weight:400;">false</span>;
+
+			<span style="color:rgb(92, 99, 112); font-weight:400;">// Find finish time of current</span>
+			<span style="color:rgb(92, 99, 112); font-weight:400;">// process</span>
+			finish_time = t + <span style="color:rgb(209, 154, 102); font-weight:400;">1</span>;
+
+			<span style="color:rgb(92, 99, 112); font-weight:400;">// Calculate waiting time</span>
+			wt[shortest] = finish_time -
+						proc[shortest].bt -
+						proc[shortest].art;
+
+			<span style="color:rgb(198, 120, 221); font-weight:400;">if</span> (wt[shortest] &lt; <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>)
+				wt[shortest] = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;
+		}
+		<span style="color:rgb(92, 99, 112); font-weight:400;">// Increment time</span>
+		t++;
+	}
+}
+
+<span style="color:rgb(92, 99, 112); font-weight:400;">// Function to calculate turn around time</span>
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">void</span> <span style="color:rgb(97, 174, 238); font-weight:400;">findTurnAroundTime</span><span style="color:rgb(171, 178, 191); font-weight:400;">(Process proc[], <span style="color:rgb(198, 120, 221); font-weight:400;">int</span> n,
+						<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> wt[], <span style="color:rgb(198, 120, 221); font-weight:400;">int</span> tat[])</span>
+</span>{
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// calculating turnaround time by adding</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// bt[i] + wt[i]</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">for</span> (<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> i = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>; i &lt; n; i++)
+		tat[i] = proc[i].bt + wt[i];
+}
+
+<span style="color:rgb(92, 99, 112); font-weight:400;">// Function to calculate average time</span>
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">void</span> <span style="color:rgb(97, 174, 238); font-weight:400;">findavgTime</span><span style="color:rgb(171, 178, 191); font-weight:400;">(Process proc[], <span style="color:rgb(198, 120, 221); font-weight:400;">int</span> n)</span>
+</span>{
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> wt[n], tat[n], total_wt = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>,
+					total_tat = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Function to find waiting time of all</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// processes</span>
+	<span style="color:rgb(230, 192, 123); font-weight:400;">findWaitingTime</span>(proc, n, wt);
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Function to find turn around time for</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// all processes</span>
+	<span style="color:rgb(230, 192, 123); font-weight:400;">findTurnAroundTime</span>(proc, n, wt, tat);
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Display processes along with all</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// details</span>
+	cout &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot; P\t\t&quot;</span>
+		&lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;BT\t\t&quot;</span>
+		&lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;WT\t\t&quot;</span>
+		&lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;TAT\t\t\n&quot;</span>;
+
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// Calculate total waiting time and</span>
+	<span style="color:rgb(92, 99, 112); font-weight:400;">// total turnaround time</span>
+	<span style="color:rgb(198, 120, 221); font-weight:400;">for</span> (<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> i = <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>; i &lt; n; i++) {
+		total_wt = total_wt + wt[i];
+		total_tat = total_tat + tat[i];
+		cout &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot; &quot;</span> &lt;&lt; proc[i].pid &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;\t\t&quot;</span>
+			&lt;&lt; proc[i].bt &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;\t\t &quot;</span> &lt;&lt; wt[i]
+			&lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;\t\t &quot;</span> &lt;&lt; tat[i] &lt;&lt; endl;
+	}
+
+	cout &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;\nAverage waiting time = &quot;</span>
+		&lt;&lt; (<span style="color:rgb(198, 120, 221); font-weight:400;">float</span>)total_wt / (<span style="color:rgb(198, 120, 221); font-weight:400;">float</span>)n;
+	cout &lt;&lt; <span style="color:rgb(152, 195, 121); font-weight:400;">&quot;\nAverage turn around time = &quot;</span>
+		&lt;&lt; (<span style="color:rgb(198, 120, 221); font-weight:400;">float</span>)total_tat / (<span style="color:rgb(198, 120, 221); font-weight:400;">float</span>)n;
+}
+
+<span style="color:rgb(92, 99, 112); font-weight:400;">// Driver code</span>
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">int</span> <span style="color:rgb(97, 174, 238); font-weight:400;">main</span><span style="color:rgb(171, 178, 191); font-weight:400;">()</span>
+</span>{
+	Process proc[] = { { <span style="color:rgb(209, 154, 102); font-weight:400;">1</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">6</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">2</span> }, { <span style="color:rgb(209, 154, 102); font-weight:400;">2</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">2</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">5</span> },
+					{ <span style="color:rgb(209, 154, 102); font-weight:400;">3</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">8</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">1</span> }, { <span style="color:rgb(209, 154, 102); font-weight:400;">4</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">3</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>}, {<span style="color:rgb(209, 154, 102); font-weight:400;">5</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">4</span>, <span style="color:rgb(209, 154, 102); font-weight:400;">4</span>} };
+	<span style="color:rgb(198, 120, 221); font-weight:400;">int</span> n = <span style="color:rgb(230, 192, 123); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">sizeof</span></span>(proc) / <span style="color:rgb(230, 192, 123); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">sizeof</span></span>(proc[<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>]);
+
+	<span style="color:rgb(230, 192, 123); font-weight:400;">findavgTime</span>(proc, n);
+	<span style="color:rgb(198, 120, 221); font-weight:400;">return</span> <span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;
+}
+</code></pre>
+			</div>
+			<div class="my-5 mx-3"><img src="/assets/shortest remaing time first.png" id="image" alt=""></div>
+
+
+
+
+
+		</div>
+		<footer class="page-footer bg-light p-2 mt-5">
+
+
+			<div class="footer-copyright text-center py-3">
+				<span>
+					This is a mini project |
+					<a target="_blank" href="https://github.com/harshadatta009/">View Source on
+						Github</a>
+				</span>
+			</div>
+
+		</footer>
+
+	</body>
+
+</html>

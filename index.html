@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Home page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+        
+    </head>
+
+    <body class="w3-light-orange">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html">CPU Scheduling Simulator</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/fcfs.html">FCFS</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/sjf.html">SJF</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/srtf.html">SRTF</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/roundrobin.html">Round Robin</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav ">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link active" href="ContactUs.html">Contact US</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+            <div class="container my-5 bg-light">
+                <div class="row">
+                    <div class="col-md text-center">
+                        <h1><b>CPU Scheduling Algorithms</b></h1>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="w3-content container" style="max-width:1400px">
+
+            <!-- Header -->
+
+            <!-- Grid -->
+            <div class="w3-row my-5">
+
+                <!-- Blog entries -->
+                <div class=" w3-padding-32 ">
+                    <!-- Blog entry -->
+                    <div class="qwe2">
+                        <div class="qwe3">
+                            <h3><b>Introduction</b></h3>
+                        </div>
+
+                        <div class="qwe4">
+                            <p>
+                                Process Scheduling is the process of the process manager handling the removal of an
+                                active process from the CPU and selecting another process based on a specific strategy.
+                                Process Scheduling is an integral part of Multi-programming applications. Such operating
+                                systems allow more than one process to be loaded into usable memory at a time and the
+                                loaded shared CPU process uses repetition time.
+                                <br>
+                                <br>
+                                <b>There are three types of process schedulers:</b>
+                            <ol>
+                                <li>
+                                    Long term or Job Scheduler
+                                </li>
+                                <li>
+                                    Short term or CPU Scheduler
+                                </li>
+                                <li>
+                                    Medium-term Scheduler
+                                </li>
+                            </ol>
+
+                            <br>
+                            <b>Why do we need to schedule processes?</b>
+                            <ul>
+                                <li>
+                                    Scheduling is important in many different computer environments. One of the most
+                                    important areas is scheduling which programs will work on the CPU. This task is
+                                    handled by the Operating System (OS) of the computer and there are many different
+                                    ways in which we can choose to configure programs.
+                                </li>
+                                <li>
+                                    Process Scheduling allows the OS to allocate CPU time for each process. Another
+                                    important reason to use a process scheduling system is that it keeps the CPU busy at
+                                    all times. This allows you to get less response time for programs.
+                                </li>
+                                <li>
+                                    Considering that there may be hundreds of programs that need to work, the OS must
+                                    launch the program, stop it, switch to another program, etc. The way the OS
+                                    configures the system to run another in the CPU is called “context switching”. If
+                                    the OS keeps context-switching programs in and out of the provided CPUs, it can give
+                                    the user a tricky idea that he or she can run any programs he or she wants to run,
+                                    all at once.
+                                </li>
+                                <li>
+                                    That’s where scheduling comes in! First, you determine the metrics, saying something
+                                    like “the amount of time until the end”. We will define this metric as “the time
+                                    interval between which a function enters the system until it is completed”. Second,
+                                    you decide on a metrics that reduces metrics. We want our tasks to end as soon as
+                                    possible.
+                                </li>
+                            </ul>
+                            CPU scheduling <span id="dots">...</span><span id="more">is the process of deciding which
+                                process will own the CPU to use while another process is suspended. The main function of
+                                the CPU scheduling is to ensure that whenever the CPU remains idle, the OS has at least
+                                selected one of the processes available in the ready-to-use line.
+                                In Multiprogramming,if the long-term scheduler selects multiple I / O binding processes
+                                then most of the time, the CPU remains an idle. The function of an effective program is
+                                to improve resource utilization.
+                                If most operating systems change their status from performance to waiting then there may
+                                always be a chance of failure in the system. So in order to minimize this excess, the OS
+                                needs to schedule tasks in order to make full use of the CPU and avoid the possibility
+                                of deadlock.
+                                <br>
+                                <p><b>Objectives of Process Scheduling Algorithm:</b></p>
+                                <ul>
+                                    <li>
+                                        Utilization of CPU at maximum level. Keep CPU as busy as possible.
+                                    </li>
+                                    <li>
+                                        Allocation of CPU should be fair.
+                                    </li>
+                                    <li>
+                                        Throughput should be Maximum. i.e. Number of processes that complete their
+                                        execution per time unit should be maximized.
+                                    </li>
+                                    <li>
+                                        Minimum turnaround time, i.e. time taken by a process to finish execution should
+                                        be the least.
+                                    </li>
+                                    <li>
+                                        There should be a minimum waiting time and the process should not starve in the
+                                        ready queue.
+                                    </li>
+                                    <li>
+                                        Minimum response time. It means that the time when a process produces the first
+                                        response should be as less as possible.
+                                    </li>
+                                </ul>
+                                <br>
+                                <p><b>Terminologies to take care of in any CPU Scheduling algorithm</b></p>
+                                <ul>
+                                    <li>
+                                        Arrival Time: Time at which the process arrives in the ready queue.
+                                    </li>
+                                    <li>
+                                        Completion Time: Time at which process completes its execution.
+                                    </li>
+                                    <li>
+                                        Burst Time: Time required by a process for CPU execution.
+                                    </li>
+                                    <li>
+                                        Turn Around Time: Time Difference between completion time and arrival time.
+                                    </li>
+                                </ul>
+                            </span></p>
+
+                            <button type="button" class="btn btn-light" onclick="myFunction()" id="myBtn">Read
+                                more</button>
+                        </div>
+                        <script>
+                            function myFunction() {
+                                var dots = document.getElementById("dots");
+                                var moreText = document.getElementById("more");
+                                var btnText = document.getElementById("myBtn");
+
+                                if (dots.style.display === "none") {
+                                    dots.style.display = "inline";
+                                    btnText.innerHTML = "Read more";
+                                    moreText.style.display = "none";
+                                } else {
+                                    dots.style.display = "none";
+                                    btnText.innerHTML = "Read less";
+                                    moreText.style.display = "inline";
+                                }
+                            }
+                        </script>
+                    </div>
+                    <hr>
+
+                    <!-- Introduction menu -->
+                    <div class="container ">
+                        <div class="w3-card w3-margin w3-margin-top">
+                            <div class="w3-container  
+                            ">
+                                <h4 class="my-3 "><b>Find the solution</b></h4>
+                                <p>When we are solving the problems, sometimes our answers may be wrong, and we cannot ask our lecturer for corrections, so
+                                this website will be your friend to help you correct your answers and get good marks.</p>
+                                <p><a href="mainpage.html" target="blank">click here to go to simulator</a></p>
+                            </div>
+
+                        </div>
+                        
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <footer class="page-footer bg-light p-2 mt-5">
+            
+            
+                <div class="footer-copyright text-center py-3">
+                    <span>
+                        This is a mini project |
+                        <a target="_blank" href="https://github.com/harshadatta009/">View Source on
+                            Github</a>
+                    </span>
+                </div>
+            
+            </footer>
+
+
+
+    </body>
+
+</html>

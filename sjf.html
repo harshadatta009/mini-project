@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>SJF</title>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html">CPU Scheduling Simulator</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="fcfs.html">FCFS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/sjf.html">SJF</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/srtf.html">SRTF</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/roundrobin.html">Round Robin</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav ">
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="contactUs.html">Contact US</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <div class="container  mt-3 border">
+            <div class="row text-capitalize bg-light ">
+                <div class="col">
+                    <h1 class=" text-center">Shortest Job First Scheduling</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col">
+                    <b>What is Shortest Job First Scheduling?</b>
+                    <br>
+                    Shortest Job First (SJF) is an algorithm in which the process having the smallest execution time is
+                    chosen for the next
+                    execution. This scheduling method can be preemptive or non-preemptive. It significantly reduces the
+                    average waiting time
+                    for other processes awaiting execution. The full form of SJF is Shortest Job First.
+                </div>
+            </div>
+        </div>
+        <div class="card container mt-3 ">
+            <h5 class="card-header ">
+                <div class="row">
+                    <div class="col-11">SJF</div>
+                </div>
+            </h5>
+            <div class="card-body" id="myInput">
+                <pre>
+<code id="htmlViewer" style="color:rgb(171, 178, 191); font-weight:400;background-color:rgb(40, 44, 52);background:rgb(40, 44, 52);display:block;padding: .5em;"><span style="color:rgb(97, 174, 238); font-weight:400;">#<span style="color:rgb(97, 174, 238); font-weight:400;">include</span><span style="color:rgb(152, 195, 121); font-weight:400;">&lt;stdio.h&gt;</span></span>
+<span style="color:rgb(97, 174, 238); font-weight:400;">#<span style="color:rgb(97, 174, 238); font-weight:400;">include</span><span style="color:rgb(152, 195, 121); font-weight:400;">&lt;string.h&gt;</span></span>
+<span style="color:rgb(171, 178, 191); font-weight:400;"><span style="color:rgb(198, 120, 221); font-weight:400;">void</span> <span style="color:rgb(97, 174, 238); font-weight:400;">main</span><span style="color:rgb(171, 178, 191); font-weight:400;">()</span> </span>{
+    <span style="color:rgb(198, 120, 221); font-weight:400;">char</span> p[<span style="color:rgb(209, 154, 102); font-weight:400;">10</span>][<span style="color:rgb(209, 154, 102); font-weight:400;">5</span>],temp[<span style="color:rgb(209, 154, 102); font-weight:400;">5</span>];
+    <span style="color:rgb(198, 120, 221); font-weight:400;">int</span> tot=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>,wt[<span style="color:rgb(209, 154, 102); font-weight:400;">10</span>],pt[<span style="color:rgb(209, 154, 102); font-weight:400;">10</span>],i,j,n,temp1;
+    <span style="color:rgb(198, 120, 221); font-weight:400;">float</span> avg=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;
+    
+    <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;enter no of processes:&quot;</span>);
+    <span style="color:rgb(230, 192, 123); font-weight:400;">scanf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;%d&quot;</span>,&amp;n);
+    
+    <span style="color:rgb(198, 120, 221); font-weight:400;">for</span>(i=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;i&lt;n;i++) {
+        <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;enter process%d name: &quot;</span>,i+<span style="color:rgb(209, 154, 102); font-weight:400;">1</span>);
+        <span style="color:rgb(230, 192, 123); font-weight:400;">scanf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;%s&quot;</span>,p[i]);
+        <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;enter process time: &quot;</span>);
+        <span style="color:rgb(230, 192, 123); font-weight:400;">scanf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;%d&quot;</span>,&amp;pt[i]);
+    }
+    <span style="color:rgb(198, 120, 221); font-weight:400;">for</span>(i=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;i&lt;n;i++) {
+        <span style="color:rgb(198, 120, 221); font-weight:400;">for</span>(j=i+<span style="color:rgb(209, 154, 102); font-weight:400;">1</span>;j&lt;n;j++) {
+            <span style="color:rgb(198, 120, 221); font-weight:400;">if</span>(pt[i]&gt;pt[j]) {
+                temp1=pt[i];
+                pt[i]=pt[j];    
+                pt[j]=temp1;
+                <span style="color:rgb(230, 192, 123); font-weight:400;">strcpy</span>(temp,p[i]);
+                <span style="color:rgb(230, 192, 123); font-weight:400;">strcpy</span>(p[i],p[j]);
+                <span style="color:rgb(230, 192, 123); font-weight:400;">strcpy</span>(p[j],temp);
+            }
+        }
+    }
+    
+    wt[<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>]=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;
+    
+    <span style="color:rgb(198, 120, 221); font-weight:400;">for</span>(i=<span style="color:rgb(209, 154, 102); font-weight:400;">1</span>;i&lt;n;i++) {
+        wt[i]=wt[i<span style="color:rgb(209, 154, 102); font-weight:400;">-1</span>]+pt[i<span style="color:rgb(209, 154, 102); font-weight:400;">-1</span>];
+        tot=tot+wt[i];  
+    }
+    avg=(<span style="color:rgb(198, 120, 221); font-weight:400;">float</span>)tot/n;
+    <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;p-name\tp-time\tw-time\n&quot;</span>);
+    
+    <span style="color:rgb(198, 120, 221); font-weight:400;">for</span>(i=<span style="color:rgb(209, 154, 102); font-weight:400;">0</span>;i&lt;n;i++)
+        <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;%s\t%d\t%d\n&quot;</span>,p[i],pt[i],wt[i]);
+    <span style="color:rgb(230, 192, 123); font-weight:400;">printf</span>(<span style="color:rgb(152, 195, 121); font-weight:400;">&quot;total waiting time = %d\n avg waiting time = %f&quot;</span>,tot,avg);
+    
+}</code></pre>
+            </div>
+            <div class="my-5 mx-3"><img src="/assets/sfj.png" id="image" alt=""></div>
+
+
+
+
+
+        </div>
+        <footer class="page-footer bg-light p-2 mt-5">
+
+
+            <div class="footer-copyright text-center py-3">
+                <span>
+                    This is a mini project |
+                    <a target="_blank" href="https://github.com/harshadatta009/">View Source on
+                        Github</a>
+                </span>
+            </div>
+
+        </footer>
+
+    </body>
+
+</html>
